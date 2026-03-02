@@ -6,6 +6,8 @@ const app = express();
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 
+const path = require("path");
+
 // Middleware
 // app.use((req, res, next) => {
 //   console.log(`In the middleware`);
@@ -14,6 +16,8 @@ const shopRoutes = require("./routes/shop");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(express.urlencoded({ extended: false })); // newer version
+
+app.use(express.static(path.join(__dirname, "public")));
 
 // app.use("/add-product", (req, res, next) => {
 //   res.send(
@@ -26,7 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //   res.redirect("/");
 // });
 
-app.use(adminRoutes);
+// start of the path - /admin
+app.use("/admin", adminRoutes);
 
 // no next() in previous request - below code wont be executed (without redirection)
 // app.use("/", (req, res, next) => {
@@ -38,7 +43,8 @@ app.use(shopRoutes);
 // 404
 // app.use so the way to get here (GET, POST) doesnt matter
 app.use((req, res, next) => {
-  res.status(404).send("<h1>Page not found</h1>");
+  // res.status(404).send("<h1>Page not found</h1>");
+  res.sendFile(path.join(__dirname, "views", "page-not-found.html"));
 });
 
 app.listen(3000);

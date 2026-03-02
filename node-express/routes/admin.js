@@ -1,14 +1,20 @@
+const path = require("path");
 const express = require("express");
 
 const router = express.Router();
 
+const rootDir = require("../util/path");
+
+// /admin/add-product - because it is executed while the url is starting with /admin
 router.get("/add-product", (req, res, next) => {
-  res.send(
-    '<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>',
-  );
+  // res.send(
+  //   '<form action="/admin/add-product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>',
+  // );
+  res.sendFile(path.join(rootDir, "views", "add-product.html"));
 });
 
-router.post("/product", (req, res, next) => {
+// different methods so paths can be same
+router.post("/add-product", (req, res, next) => {
   console.log(req.body);
   res.redirect("/");
 });
