@@ -12,7 +12,14 @@ router.get("/", (req, res, next) => {
   const products = adminData.products;
 
   // views folder and templating engine are defined; no need for extra informations
-  res.render("shop", { prods: products, pageTitle: "Shop", path: "/" });
+  res.render("shop", {
+    prods: products,
+    pageTitle: "Shop",
+    path: "/",
+    hasProducts: products.length > 0,
+    activeShop: true,
+    productCSS: true,
+  });
 });
 
 module.exports = router;
