@@ -1,0 +1,13 @@
+<%- include('includes/head.ejs') %>
+    <h1><%= pageTitle %></h1>
+    <% if (users.length > 0) { %>
+			<div class="users">
+				<% for (let user of users) { %>
+					<div class="user">
+						<p><%= user.name %></p>
+					</div>
+				<% } %>
+			</div>
+		<% } %>
+  </body>
+</html>

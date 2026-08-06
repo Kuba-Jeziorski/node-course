@@ -1,0 +1,12 @@
+<%- include('includes/head.ejs') %>
+  <body>
+    <h1><%= pageTitle %></h1>
+    <main>
+      <form action="/users" method="post">
+        <label for="name">Add user label</label>
+        <input type="text" name="name" id="name" />
+        <button type="submit">Add user</button>
+      </form>
+    </main>
+  </body>
+</html>
